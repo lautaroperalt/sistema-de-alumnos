@@ -4,18 +4,13 @@ using System.Text;
 
 namespace Sistema_de_Alumnos
 {
-    public class Alumno
+    public class Alumno : Persona
     {
-        public string name { get; set; }
-        public int file { get; private set; }
         public decimal note1 { get; private set; }
         public decimal note2 { get; private set; }
 
-        public Alumno(string name, int file)
-        {
-            this.name = name;
-            this.file = file;
-        }
+        public Alumno(string name, int file) : base(name, file)
+        { }
 
         public decimal AverageGrade() 
         {
