@@ -34,3 +34,93 @@ Console.WriteLine($"El promedio de los alumnos esta formado por: {alumnoUno.name
 
 //No, no hay forma de que haya una nota de 47. Primero se utilizo private set para limitar las variaciones externas
 //luego la unica forma de moficiar es pasando por el metodo de UploadGrades que rechazaria cualquier nota superior a 10
+
+List<Alumno> listaAlumnos = new List<Alumno>();
+bool exit = false; 
+
+while (!exit)
+{
+    Console.WriteLine("Menu");
+    Console.WriteLine("1. Agregar un alumno");
+    Console.WriteLine("2. Listar todos los alumnos");
+    Console.WriteLine("3. Buscar un alumno por legajo");
+    Console.WriteLine("4. Promedio general del curso");
+    Console.WriteLine("5. Cantidad de alumnos aprobados");
+    Console.WriteLine("6. Salir");
+    Console.Write("Elige una opción: ");
+    string option = Console.ReadLine();
+
+    switch (option)
+    {
+        case "1":
+            Console.Write("Ingresar el nombre del alumno que desea almacenar: ");
+            string nameNombre = Console.ReadLine();
+
+            Console.Write("Ingrese el numero de legajo: ");
+            int fileLegajo = int.Parse(Console.ReadLine());
+
+            Alumno newAlumn = new Alumno(nameNombre, fileLegajo);
+
+            listaAlumnos.Add(newAlumn);
+            Console.WriteLine("Alumno agregado correcamente");
+            break;
+
+        case "2":
+            foreach (Alumno aF in listaAlumnos)
+            {
+                Console.WriteLine($"{aF}");
+            }
+            break;
+
+        case "3":
+            Console.WriteLine("Ingrese el legajo a buscar: ");
+                int fileToSearch = int.Parse(Console.ReadLine());
+
+            foreach (Alumno aF in listaAlumnos)
+            {
+                if (aF.file == fileToSearch)
+                {
+                    Console.WriteLine($"El alumno es {aF.name}");
+                    break;
+                }
+                else
+                    Console.WriteLine("El legajo no coincide con ninguno de los alumnos del sistema");
+            }
+            break;
+
+        case "4":
+            if (listaAlumnos.Count == 0)
+            {
+                Console.WriteLine("Todavia no hay alumnos cargados en el sistema para calcular el promedio: ");
+            }
+            else
+            {
+                decimal sumAverage = 0;
+
+                foreach (Alumno aF in listaAlumnos)
+                    sumAverage += aF.AverageGrade();
+
+                decimal sumGeneral = sumAverage / listaAlumnos.Count;
+                Console.WriteLine($"El promedio general de curso es de: {sumGeneral}");
+            }
+            break;
+
+        case "5":
+            int alumnTotalPassed = 0;
+            foreach (Alumno aF in listaAlumnos)
+            {
+                if (aF.Passed())
+                    alumnTotalPassed++;
+            }
+            Console.WriteLine($"Cantidad de alumnos aprobados: {alumnTotalPassed}");
+            break;
+
+        case "6":
+            exit = true;
+            break;
+        default:
+            Console.WriteLine("Ingresar una opcion valida: ");
+            break;
+    }
+    
+}
