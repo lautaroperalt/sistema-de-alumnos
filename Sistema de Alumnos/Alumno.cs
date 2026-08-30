@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sistema_de_Alumnos
 {
-    public class Alumno : Persona
+    public class Alumno : Persona, IExportable
     {
         public decimal note1 { get; private set; }
         public decimal note2 { get; private set; }
@@ -43,6 +43,14 @@ namespace Sistema_de_Alumnos
                 return true;
             } else return false;
             
+        }
+        public override string Presentarse()
+        {
+            return $"Hola, soy {name}, alumno con legajo {file}";
+        }
+        public string ExportarLinea()
+        {
+            return $"ALUMNO;{file};{name};{note1};{note2}";
         }
     }
 }

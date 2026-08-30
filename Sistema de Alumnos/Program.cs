@@ -121,6 +121,23 @@ while (!exit)
         default:
             Console.WriteLine("Ingresar una opcion valida: ");
             break;
-    }
-    
+    }    
+}
+//////////////////////////////////////////////////////////////////
+List<Persona> peopleList = new List<Persona>();
+
+foreach (Persona p in peopleList)
+{
+    Console.WriteLine(p.Presentarse());
+} //gracais al polimorfismo se evita de escribir cadenas de if ineficientes y permite que el programa sea escalable a futuro (con alguna nueva clase)
+
+List<IExportable> exportableList = new List<IExportable>();
+
+exportableList.Add(new Alumno("Ana Perez", 1234));
+exportableList.Add(new Profesor("Marta Diaz", 5678, "Programacion"));
+exportableList.Add(new Materia("PROG1", "Programacion I", 128));
+
+foreach (IExportable item in exportableList)
+{
+    Console.WriteLine(item.ExportarLinea());
 }
