@@ -35,6 +35,8 @@ Console.WriteLine($"El promedio de los alumnos esta formado por: {alumnoUno.name
 //No, no hay forma de que haya una nota de 47. Primero se utilizo private set para limitar las variaciones externas
 //luego la unica forma de moficiar es pasando por el metodo de UploadGrades que rechazaria cualquier nota superior a 10
 
+Console.WriteLine();
+
 List<Alumno> listaAlumnos = new List<Alumno>();
 bool exit = false; 
 
@@ -49,7 +51,7 @@ while (!exit)
     Console.WriteLine("6. Salir");
     Console.Write("Elige una opción: ");
     string option = Console.ReadLine();
-
+    Console.WriteLine();
     switch (option)
     {
         case "1":
@@ -61,7 +63,15 @@ while (!exit)
 
             Alumno newAlumn = new Alumno(nameNombre, fileLegajo);
 
+            Console.Write("Ingrese la primer nota del alumno 'x,xx': ");
+            decimal newGradeOne = decimal.Parse(Console.ReadLine());
+
+            Console.Write("Ingrese la segunda nota del alumno 'x,xx': ");
+            decimal newGradeTwo = decimal.Parse(Console.ReadLine());
+            newAlumn.UploadGrades(newGradeOne, newGradeTwo);
+
             listaAlumnos.Add(newAlumn);
+            Console.WriteLine();
             Console.WriteLine("Alumno agregado correcamente");
             break;
 
@@ -126,6 +136,9 @@ while (!exit)
 //////////////////////////////////////////////////////////////////
 List<Persona> peopleList = new List<Persona>();
 
+peopleList.Add(new Persona("Marta Luna", 5678));
+peopleList.Add(new Persona("Marto Sol", 1234));
+
 foreach (Persona p in peopleList)
 {
     Console.WriteLine(p.Presentarse());
@@ -141,3 +154,5 @@ foreach (IExportable item in exportableList)
 {
     Console.WriteLine(item.ExportarLinea());
 }
+
+Console.ReadLine();
